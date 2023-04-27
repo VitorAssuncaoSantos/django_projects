@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{% load bootstrap5 %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<body>
+    <h1 id="">Chat desenvolver NF</h1>
+    <main>
+        <div class="row">
+            <div class="col">
+                <h2>Salas</h2>
+                {% for sala in salas %}
+                <a href="{% url 'chat_pmnf:sala' sala.id %}">{{sala.nome}}</a>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <h2>Salas que você participa</h2>
+                {% for sala in salas_user %}
+                <a href="{%  url 'chat_pmnf:sala' sala.id %}">{{sala.nome}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

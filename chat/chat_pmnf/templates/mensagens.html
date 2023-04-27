@@ -1,0 +1,3 @@
+{% for mensagem in mensagens %}
+<p><b>{{mensagem.dt_inclusao}}{{mensagem.user.first_name}}:</b> {{mensagem.conteudo}}</p>
+{% endfor %}

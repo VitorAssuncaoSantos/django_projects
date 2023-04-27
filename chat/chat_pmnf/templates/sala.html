@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load bootstrap5 %}
+{% load static%}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap -->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<body>
+    <p>{{nome_da_sala}} - {{request.user.first_name}}</p>
+    <div class="row">
+        <div id="caixa_de_mensagens" class="col">
+            {% for mensagem in mensagens %}
+            <p><b>{{mensagem.dt_inclusao}}{{mensagem.user.first_name}}:</b> {{mensagem.conteudo}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="" type="submit">Enviar</button>
+    </form>
+</body>
+
+<script>
+    const response = () => {
+        fetch("/mensagens/" + {{ id }})
+            .then(response => response.text())
+        .then(data => {
+            // Inserção da resposta na div
+            document.getElementById("caixa_de_mensagens").innerHTML = data;
+        });
+    }
+    setInterval(response, 4000);
+</script>
+
+</html>
